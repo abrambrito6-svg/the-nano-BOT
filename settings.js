@@ -10,7 +10,7 @@ global.version = '^2.0 - Latest'
 global.dev = "© ⍴᥆ᥕᥱrᥱძ ᑲᥡ ⁱᵃᵐ|𝔇ĕ𝐬†𝓻⊙γ𒆜"
 global.links = {
 api: 'https://api.yuki-wabot.my.id',
-channel: "https://whatsapp.com/channel/0029Vb64nWqLo4hb8cuxe23n",
+channel: "https://whatsapp.com/channel/0029VbCZ1wt65yDHLr5FUV2S",
 github: "https://github.com/iamDestroy/YukiBot-MD",
 gmail: "thekingdestroy507@gmail.com"
 }

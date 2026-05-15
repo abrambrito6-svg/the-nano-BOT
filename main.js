@@ -160,6 +160,21 @@ export default async (client, m) => {
     await m.reply(`ꕥ Estas ${user.genre === 'Mujer' ? 'baneada' : user.genre === 'Hombre' ? 'baneado' : 'baneado/a'}, no puedes usar comandos en este bot!\n\n> ● *Razón ›* ${user.bannedReason || 'Sin especificar'}\n\n> ● Si este Bot es cuenta oficial y tienes evidencia que respalde que este mensaje es un error, puedes exponer tu caso con un moderador.`);
     return;
   }
+  // Auto-expirar premium vencido
+  if (user.premium && user.premiumExpiry && new Date() > new Date(user.premiumExpiry)) {
+    user.premium = false
+    user.premiumExpiry = null
+  }
+  // Verificación premium
+  const freeCommands = ['menu', 'help', 'allmenu', 'ping', 'speed', 'p', 'infobot', 'botinfo', 'premium', 'invite', 'invitar', 'status', 'estado', 'report', 'reporte', 'suggest', 'sug', 'rank', 'rango', 'nivel', 'xp', 'top']
+  if (!isOwners && !user.premium && !freeCommands.includes(command)) {
+    return m.reply(
+      `💎 *Acceso Premium Requerido*\n\n` +
+      `> Para usar los comandos de este bot necesitas ser usuario *Premium*.\n` +
+      `> Contacta al administrador para adquirirlo.\n\n` +
+      `> ℹ️ Usa *${usedPrefix}premium* para ver tu estado.`
+    )
+  }
 
   if (!users.stats) users.stats = {};
   if (!users.stats[today]) users.stats[today] = { msgs: 0, cmds: 0 }; 

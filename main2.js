@@ -160,6 +160,29 @@ export default async (client, m) => {
     await m.reply(`ꕥ Estas ${user.genre === 'Mujer' ? 'baneada' : user.genre === 'Hombre' ? 'baneado' : 'baneado/a'}, no puedes usar comandos en este bot!\n\n> ● *Razón ›* ${user.bannedReason || 'Sin especificar'}\n\n> ● Si este Bot es cuenta oficial y tienes evidencia que respalde que este mensaje es un error, puedes exponer tu caso con un moderador.`);
     return;
   }
+  // Verificación de registro
+  const sinRegistro = ['reg', 'registro', 'registrar', 'registrarme', 'register',
+    'menu', 'help', 'allmenu', 'ping', 'speed', 'p', 'infobot', 'botinfo',
+    'invite', 'invitar', 'status', 'estado']
+  if (!isOwners && !user.registered && !sinRegistro.includes(command)) {
+    const mensajes = [
+      `🦊 *Hmph...* ¿quién eres tú para pedirme algo?\n> Regístrate primero con *${usedPrefix}reg TuNombre.TuEdad*\n> _No hablo con desconocidos._ 🌸`,
+      `🦊 No te reconozco, mortal.\n> Usa *${usedPrefix}reg TuNombre.TuEdad* para registrarte.\n> _Luego quizás te preste atención._ ✨`,
+      `🦊 *¿Perdona?* ¿Acaso crees que respondo a cualquiera?\n> Primero regístrate: *${usedPrefix}reg TuNombre.TuEdad*\n> _Tengo estándares, ¿sabes?_ 🦊`,
+      `🦊 Interesante... pero no.\n> No atiendo a quienes no existen en mi lista.\n> Usa *${usedPrefix}reg TuNombre.TuEdad* y hablamos. 🌸`,
+      `🦊 *Vaya, vaya...* otro desconocido.\n> Muéstrame quién eres primero: *${usedPrefix}reg TuNombre.TuEdad*\n> _No es tan difícil, ¿verdad?_ ✨`,
+    ]
+    const msg = mensajes[Math.floor(Math.random() * mensajes.length)]
+    try {
+      await client.sendMessage(m.chat, {
+        image: { url: 'https://i.ibb.co/Sw4YxBfY/29e2ccf0779aa4ce14168d18eee58713.jpg' },
+        caption: msg
+      }, { quoted: m })
+    } catch (_) {
+      await m.reply(msg)
+    }
+    return
+  }
 
   if (!users.stats) users.stats = {};
   if (!users.stats[today]) users.stats[today] = { msgs: 0, cmds: 0 }; 

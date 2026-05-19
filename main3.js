@@ -160,6 +160,70 @@ export default async (client, m) => {
     await m.reply(`ꕥ Estas ${user.genre === 'Mujer' ? 'baneada' : user.genre === 'Hombre' ? 'baneado' : 'baneado/a'}, no puedes usar comandos en este bot!\n\n> ● *Razón ›* ${user.bannedReason || 'Sin especificar'}\n\n> ● Si este Bot es cuenta oficial y tienes evidencia que respalde que este mensaje es un error, puedes exponer tu caso con un moderador.`);
     return;
   }
+// Verificación de registro
+  const sinRegistro = [
+    'reg', 'registro', 'registrar', 'registrarme', 'register',
+    'menu', 'help', 'allmenu',
+    'ping', 'speed', 'p',
+    'infobot', 'botinfo',
+    'invite', 'invitar',
+    'status', 'estado'
+  ]
+
+  if (!isOwners && !user.registered && !sinRegistro.includes(command)) {
+
+    const mensajes = [
+
+      `🩸 *Acceso denegado.*\n` +
+      `> Tu existencia aún no ha sido registrada.\n\n` +
+      `⌛ Usa:\n` +
+      `> *${usedPrefix}reg TuNombre.TuEdad*\n\n` +
+      `> _No puedo permitir desconocidos dentro de mi tiempo._ ⏳`,
+
+      `🕰️ Qué extraño...\n` +
+      `> Intentaste usar mis comandos sin existir en mi sistema.\n\n` +
+      `🩸 Regístrate primero:\n` +
+      `> *${usedPrefix}reg TuNombre.TuEdad*\n\n` +
+      `> _Entonces decidiré si eres interesante o no._`,
+
+      `⏳ *Detente ahí.*\n` +
+      `> Aún no estás registrado.\n\n` +
+      `🩸 Usa:\n` +
+      `> *${usedPrefix}reg TuNombre.TuEdad*\n\n` +
+      `> _El tiempo no avanza para quienes no existen._`,
+
+      `🩸 *Registro requerido.*\n` +
+      `> No responderé a usuarios desconocidos.\n\n` +
+      `⌛ Regístrate usando:\n` +
+      `> *${usedPrefix}reg TuNombre.TuEdad*\n\n` +
+      `> _Quizá después puedas hablar conmigo._`,
+
+      `🕰️ Interesante...\n` +
+      `> Un desconocido intentando acceder a mi sistema.\n\n` +
+      `🩸 Primero regístrate:\n` +
+      `> *${usedPrefix}reg TuNombre.TuEdad*\n\n` +
+      `> _Tu tiempo aún no ha comenzado._ ⌛`
+    ]
+
+    const msg = mensajes[Math.floor(Math.random() * mensajes.length)]
+
+    try {
+
+      await client.sendMessage(m.chat, {
+        image: {
+          url: 'https://i.ibb.co/XZPxry0z/IMG-20260518-WA0245.jpg'
+        },
+        caption: msg
+      }, { quoted: m })
+
+    } catch (_) {
+
+      await m.reply(msg)
+
+    }
+
+    return
+  }
 
   if (!users.stats) users.stats = {};
   if (!users.stats[today]) users.stats[today] = { msgs: 0, cmds: 0 }; 

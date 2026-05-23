@@ -241,3 +241,4 @@ cd && cd YukiBot-MD && rm -rf Sessions/Owner && npm start
 [![ZyxlJs](https://github.com/DevZyxlJs.png?size=100)](https://github.com/DevZyxlJs) [![Carlos](https://github.com/AzamiJs.png?size=100)](https://github.com/AzamiJs)
 
 ### 💐 Propietario
++502 3188 2808
